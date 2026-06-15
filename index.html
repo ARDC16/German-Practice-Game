@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeutschQuest Pro — Goethe A1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.29.0/tabler-icons.min.css">
+<style>
+/* =============================================
+   DESIGN SYSTEM
+   ============================================= */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0B0F1A;
+  --surface:#141929;
+  --surface2:#1C2338;
+  --surface3:#252D42;
+  --border:rgba(255,255,255,0.06);
+  --border-active:rgba(255,255,255,0.14);
+
+  --text:#F1F5F9;
+  --text-sub:#94A3B8;
+  --text-muted:#56637A;
+
+  --gold:#F5A623;
+  --gold-light:rgba(245,166,35,0.14);
+  --gold-glow:0 0 24px rgba(245,166,35,0.25);
+
+  --green:#4ADE80;
+  --green-dim:rgba(74,222,128,0.11);
+  --green-text:#86EFAC;
+
+  --red:#F87171;
+  --red-dim:rgba(248,113,113,0.11);
+  --red-text:#FCA5A5;
+
+  --blue:#60A5FA;
+  --blue-dim:rgba(96,165,250,0.11);
+  --blue-text:#93C5FD;
+
+  --purple:#C084FC;
+  --purple-dim:rgba(192,132,252,0.11);
+  --purple-text:#D8B4FE;
+
+  --teal:#2DD4BF;
+  --teal-dim:rgba(45,212,191,0.11);
+  --teal-text:#5EEAD4;
+
+  --amber:#FBBF24;
+  --amber-dim:rgba(251,191,36,0.11);
+  --amber-text:#FDE68A;
+
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:999px;
+
+  --shadow-sm:0 1px 4px rgba(0,0,0,0.4);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.5),0 1px 4px rgba(0,0,0,0.3);
+  --shadow-lg:0 10px 40px rgba(0,0,0,0.6),0 4px 12px rgba(0,0,0,0.4);
+
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'SF Mono','Fira Code','Consolas',monospace;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%,rgba(245,166,35,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 55% 40% at 85% 100%,rgba(96,165,250,0.05) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* =============================================
+   GERMAN FLAG STRIPE
+   ============================================= */
+.flag-stripe{
+  height:4px;
+  background:linear-gradient(to right,#1C1C1C 33.33%,#CC0000 33.33%,#CC0000 66.66%,#F5A623 66.66%);
+  position:relative;z-index:10;
+}
+
+/* =============================================
+   LAYOUT
+   ============================================= */
+.app-wrapper{
+  max-width:680px;
+  margin:0 auto;
+  position:relative;z-index:1;
+}
+
+/* =============================================
+   HEADER
+   ============================================= */
+.app-header{
+  padding:14px 16px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.brand{display:flex;align-items:center;gap:10px}
+
+.brand-name{
+  font-size:1.1rem;font-weight:800;
+  background:linear-gradient(135deg,#F5A623,#FFD060);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  letter-spacing:-0.02em;
+}
+
+.brand-badge{
+  font-size:0.62rem;font-weight:700;
+  background:var(--amber-dim);
+  color:var(--amber-text);
+  padding:3px 10px;border-radius:var(--r-full);
+  border:1px solid rgba(251,191,36,0.22);
+  letter-spacing:0.05em;text-transform:uppercase;
+}
+
+.top-xp{
+  display:flex;align-items:center;gap:5px;
+  font-size:0.8rem;font-weight:700;
+  color:var(--gold);
+  background:var(--gold-light);
+  padding:6px 14px;border-radius:var(--r-full);
+  border:1px solid rgba(245,166,35,0.2);
+  transition:all 0.3s;
+}
+
+.top-xp i{font-size:0.95rem}
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+.nav{
+  display:flex;gap:3px;
+  background:var(--surface);
+  border-radius:var(--r-2xl);
+  padding:5px;
+  margin:0 16px 16px;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+}
+
+.nav-btn{
+  flex:1;padding:8px 4px;
+  border:none;background:none;
+  border-radius:var(--r-xl);
+  font-size:0.67rem;color:var(--text-muted);
+  font-weight:600;cursor:pointer;
+  transition:all 0.2s ease;
+  font-family:var(--font);
+  display:flex;flex-direction:column;
+  align-items:center;gap:2px;
+  letter-spacing:0.01em;
+}
+
+.nav-btn i{font-size:1.15rem;line-height:1}
+
+.nav-btn:hover:not(.act){
+  color:var(--text-sub);
+  background:var(--surface2);
+}
+
+.nav-btn.act{
+  background:linear-gradient(135deg,rgba(245,166,35,0.18),rgba(245,166,35,0.08));
+  color:var(--gold);
+  border:1px solid rgba(245,166,35,0.22);
+  box-shadow:0 2px 8px rgba(245,166,35,0.12);
+}
+
+/* =============================================
+   SCREENS
+   ============================================= */
+.screen{display:none;padding:0 16px 32px;animation:screen-in 0.2s ease}
+.screen.active{display:block}
+
+@keyframes screen-in{
+  from{opacity:0;transform:translateY(6px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* =============================================
+   HERO STRIP
+   ============================================= */
+.hero-strip{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:20px;
+  margin-bottom:12px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-md);
+}
+
+.hero-strip::before{
+  content:'';position:absolute;
+  top:-50px;right:-50px;
+  width:200px;height:200px;
+  background:radial-gradient(circle,rgba(245,166,35,0.1) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+.hero-row{
+  display:flex;align-items:center;
+  gap:16px;margin-bottom:16px;
+}
+
+.xp-badge{
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  flex-shrink:0;
+  box-shadow:var(--gold-glow),0 4px 14px rgba(0,0,0,0.35);
+  position:relative;
+}
+
+.xp-badge::after{
+  content:'';position:absolute;inset:-3px;
+  border-radius:50%;
+  border:2px solid rgba(245,166,35,0.28);
+}
+
+.xp-badge strong{font-size:0.8rem;font-weight:800;color:#1A1000;line-height:1}
+.xp-badge span{font-size:0.58rem;font-weight:700;color:rgba(0,0,0,0.55)}
+
+.xp-bar-wrap{flex:1}
+
+.xp-label{
+  display:flex;justify-content:space-between;
+  font-size:0.72rem;color:var(--text-sub);
+  margin-bottom:7px;font-weight:500;
+}
+
+.xp-label strong{color:var(--text);font-weight:700}
+
+.xp-bar{
+  height:8px;
+  background:var(--surface3);
+  border-radius:var(--r-full);
+  overflow:hidden;
+}
+
+.xp-fill{
+  height:100%;
+  background:linear-gradient(90deg,#F5A623,#FFD060);
+  border-radius:var(--r-full);
+  transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+  position:relative;overflow:hidden;
+}
+
+.xp-fill::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+  animation:shimmer 2.2s ease-in-out infinite;
+}
+
+@keyframes shimmer{
+  0%{transform:translateX(-100%)}
+  100%{transform:translateX(250%)}
+}
+
+.streak-row{display:flex;gap:7px;flex-wrap:wrap}
+
+.streak-pill{
+  display:flex;align-items:center;gap:5px;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:var(--r-full);
+  padding:5px 13px;
+  font-size:0.74rem;color:var(--text-sub);
+  transition:border-color 0.15s;
+}
+
+.streak-pill strong{color:var(--text);font-weight:700}
+.streak-pill i{font-size:0.95rem}
+
+/* =============================================
+   STATS MINI
+   ============================================= */
+.stats-mini{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:8px;margin-bottom:16px;
+}
+
+.sbox{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:14px 10px;
+  text-align:center;
+  box-shadow:var(--shadow-sm);
+  transition:border-color 0.15s,transform 0.15s;
+  cursor:default;
+}
+
+.sbox:hover{border-color:var(--border-active);transform:translateY(-1px)}
+
+.sbox strong{
+  display:block;font-size:1.45rem;font-weight:800;
+  color:var(--text);line-height:1;margin-bottom:5px;
+  letter-spacing:-0.03em;
+}
+
+.sbox span{font-size:0.67rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+
+/* =============================================
+   SECTION LABEL
+   ============================================= */
+.section-label{
+  font-size:0.66rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--text-muted);margin-bottom:10px;
+}
+
+/* =============================================
+   MODE GRID
+   ============================================= */
+.mode-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;margin-bottom:16px;
+}
+
+.mcard{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-xl);
+  padding:16px;cursor:pointer;
+  transition:all 0.2s ease;
+  text-align:left;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+
+.mcard::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;
+  height:2px;opacity:0;
+  transition:opacity 0.2s;
+}
+
+.mcard:hover{
+  transform:translateY(-3px);
+  border-color:var(--border-active);
+  box-shadow:var(--shadow-md);
+}
+
+.mcard:hover::before{opacity:1}
+.mcard:active{transform:translateY(-1px)}
+
+.mcard-ai::before{background:linear-gradient(90deg,var(--purple),var(--blue))}
+.mcard-challenge::before{background:linear-gradient(90deg,var(--amber),var(--gold))}
+.mcard-flash::before{background:linear-gradient(90deg,var(--blue),var(--teal))}
+.mcard-speak::before{background:linear-gradient(90deg,var(--teal),var(--green))}
+.mcard-versus::before{background:linear-gradient(90deg,var(--green),var(--teal))}
+.mcard-quick::before{background:linear-gradient(90deg,var(--gold),var(--amber))}
+
+.mcard-icon{
+  width:48px;height:48px;
+  border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:12px;font-size:1.75rem;
+  line-height:1;
+}
+
+.mcard-ai .mcard-icon{background:var(--purple-dim)}
+.mcard-challenge .mcard-icon{background:var(--amber-dim)}
+.mcard-flash .mcard-icon{background:var(--blue-dim)}
+.mcard-speak .mcard-icon{background:var(--teal-dim)}
+.mcard-versus .mcard-icon{background:var(--green-dim)}
+.mcard-quick .mcard-icon{background:var(--gold-light)}
+
+/* Answer explanation box */
+.explanation{
+  background:var(--surface2);
+  border:1px solid var(--border-active);
+  border-radius:var(--r-lg);
+  padding:12px 16px;
+  font-size:0.82rem;
+  color:var(--text-sub);
+  line-height:1.8;
+  margin-bottom:12px;
+  display:none;
+}
+.explanation.show{display:block;animation:fb-in 0.25s ease}
+.explanation-label{
+  font-size:0.62rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--text-muted);margin-bottom:5px;
+  display:flex;align-items:center;gap:5px;
+}
+.explanation-loading{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.8rem;color:var(--purple-text);
+}
+.explanation-loading i{animation:spin-slow 1.5s linear infinite;font-size:0.95rem}
+
+/* Next question button */
+.next-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;border:none;border-radius:var(--r-lg);
+  font-size:0.92rem;font-weight:800;cursor:pointer;
+  font-family:var(--font);margin-top:10px;
+  transition:all 0.2s;
+  box-shadow:0 4px 14px rgba(245,166,35,0.28);
+  display:none;
+  align-items:center;justify-content:center;gap:8px;
+}
+.next-btn.show{display:flex;animation:fb-in 0.25s ease}
+.next-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.38)}
+
+.mcard h3{
+  font-size:0.9rem;font-weight:700;
+  color:var(--text);margin-bottom:4px;letter-spacing:-0.01em;
+}
+
+.mcard p{font-size:0.72rem;color:var(--text-muted);line-height:1.55}
+
+.mcard-badge{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:0.6rem;font-weight:700;
+  padding:3px 9px;border-radius:var(--r-full);
+  margin-top:8px;letter-spacing:0.04em;text-transform:uppercase;
+}
+
+.badge-ai{background:var(--purple-dim);color:var(--purple-text);border:1px solid rgba(192,132,252,0.2)}
+.badge-live{background:var(--green-dim);color:var(--green-text);border:1px solid rgba(74,222,128,0.2)}
+.badge-new{background:var(--blue-dim);color:var(--blue-text);border:1px solid rgba(96,165,250,0.2)}
+.badge-exam{background:var(--amber-dim);color:var(--amber-text);border:1px solid rgba(251,191,36,0.2)}
+
+/* =============================================
+   20-DAY CHALLENGE
+   ============================================= */
+.challenge-hero{
+  background:linear-gradient(135deg,rgba(245,166,35,0.11),rgba(251,191,36,0.05));
+  border:1px solid rgba(245,166,35,0.2);
+  border-radius:var(--r-2xl);padding:20px;
+  margin-bottom:16px;
+  position:relative;overflow:hidden;
+  box-shadow:var(--shadow-sm);
+}
+
+.challenge-hero::after{
+  content:'🏆';position:absolute;
+  right:-4px;top:-6px;font-size:5.5rem;
+  opacity:0.07;transform:rotate(12deg);
+  pointer-events:none;
+}
+
+.challenge-hero h2{
+  font-size:1.05rem;font-weight:700;
+  color:var(--amber-text);margin-bottom:6px;
+  display:flex;align-items:center;gap:8px;
+}
+
+.challenge-hero p{
+  font-size:0.8rem;
+  color:rgba(253,230,138,0.65);line-height:1.65;
+}
+
+.day-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);
+  gap:6px;margin-bottom:16px;
+}
+
+.day-cell{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:8px 4px;text-align:center;
+  cursor:pointer;transition:all 0.18s;
+  box-shadow:var(--shadow-sm);
+}
+
+.day-cell:hover:not(.locked){
+  border-color:var(--gold);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow-md);
+}
+
+.day-cell.done{
+  background:var(--green-dim);
+  border-color:rgba(74,222,128,0.3);
+}
+
+.day-cell.today{
+  border:2px solid var(--gold);
+  background:var(--gold-light);
+  box-shadow:var(--gold-glow);
+}
+
+.day-cell.locked{opacity:0.38;cursor:default}
+
+.day-cell .day-num{font-size:0.6rem;color:var(--text-muted);font-weight:600;margin-bottom:2px}
+.day-cell .day-icon{font-size:1.05rem;margin:3px 0}
+.day-cell .day-topic{
+  font-size:0.55rem;color:var(--text-muted);line-height:1.4;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+.day-detail{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-2xl);padding:20px;
+  margin-bottom:16px;box-shadow:var(--shadow-md);
+}
+
+.day-detail h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-0.01em}
+
+.task-list{list-style:none;margin-top:12px}
+
+.task-row{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 0;border-bottom:1px solid var(--border);
+  font-size:0.84rem;color:var(--text-sub);
+  transition:color 0.15s;
+}
+
+.task-row:last-child{border-bottom:none}
+
+.task-check{
+  width:21px;height:21px;border-radius:6px;
+  border:1.5px solid var(--border-active);
+  background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;cursor:pointer;
+  transition:all 0.15s;font-size:0.72rem;
+}
+
+.task-check:hover:not(.done){border-color:var(--green);background:var(--green-dim)}
+.task-check.done{background:var(--green-dim);border-color:rgba(74,222,128,0.5);color:var(--green)}
+
+.start-day-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;border:none;border-radius:var(--r-lg);
+  font-size:0.92rem;font-weight:700;cursor:pointer;
+  margin-top:16px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:all 0.2s;letter-spacing:-0.01em;
+  box-shadow:0 4px 18px rgba(245,166,35,0.3);
+  font-family:var(--font);
+}
+
+.start-day-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,0.4)}
+
+/* =============================================
+   FLASHCARDS
+   ============================================= */
+.fc-cat-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+
+.cat-chip{
+  padding:6px 15px;border-radius:var(--r-full);
+  border:1px solid var(--border);
+  background:var(--surface);
+  font-size:0.75rem;font-weight:500;
+  color:var(--text-muted);cursor:pointer;
+  transition:all 0.15s;font-family:var(--font);
+}
+
+.cat-chip:hover{border-color:var(--border-active);color:var(--text-sub)}
+
+.cat-chip.act{
+  background:var(--gold-light);
+  border-color:rgba(245,166,35,0.35);
+  color:var(--gold);font-weight:700;
+}
+
+.fc-progress{
+  font-size:0.78rem;color:var(--text-muted);
+  text-align:center;margin-bottom:10px;font-weight:500;
+}
+
+.card-wrap{perspective:900px;margin-bottom:12px}
+
+.flip-card{
+  width:100%;min-height:190px;
+  position:relative;transform-style:preserve-3d;
+  transition:transform 0.52s cubic-bezier(0.4,0,0.2,1);
+  cursor:pointer;
+}
+
+.flip-card.flipped{transform:rotateY(180deg)}
+
+.card-face{
+  position:absolute;width:100%;min-height:190px;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r-2xl);border:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:28px 24px;text-align:center;
+  box-shadow:var(--shadow-lg);
+}
+
+.card-front{background:var(--surface)}
+
+.card-back{
+  background:linear-gradient(135deg,#1A2A4A,#0D1B38);
+  border-color:rgba(96,165,250,0.18);
+  transform:rotateY(180deg);
+}
+
+.card-german{
+  font-size:2.1rem;font-weight:800;
+  color:var(--text);margin-bottom:8px;
+  letter-spacing:-0.03em;
+}
+
+.card-pos{
+  font-size:0.68rem;color:var(--text-muted);
+  font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+
+.card-english{
+  font-size:1.35rem;color:var(--blue);
+  font-weight:700;margin-bottom:10px;
+  letter-spacing:-0.01em;
+}
+
+.card-example{
+  font-size:0.82rem;color:var(--text-muted);
+  font-style:italic;line-height:1.65;
+}
+
+.card-tap-hint{
+  font-size:0.72rem;color:var(--text-muted);
+  margin-top:12px;display:flex;align-items:center;gap:5px;
+}
+
+.srs-row{display:flex;gap:8px;margin-top:12px}
+
+.srs-btn{
+  flex:1;padding:11px;border:none;
+  border-radius:var(--r-lg);
+  font-size:0.82rem;font-weight:700;cursor:pointer;
+  font-family:var(--font);
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  transition:all 0.15s;
+}
+
+.srs-btn:hover{transform:translateY(-2px)}
+
+.srs-hard{background:var(--red-dim);color:var(--red-text);border:1px solid rgba(248,113,113,0.2)}
+.srs-ok{background:var(--amber-dim);color:var(--amber-text);border:1px solid rgba(251,191,36,0.2)}
+.srs-easy{background:var(--green-dim);color:var(--green-text);border:1px solid rgba(74,222,128,0.2)}
+
+/* =============================================
+   SPEAK / PRONUNCIATION
+   ============================================= */
+.speak-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:32px 24px;text-align:center;
+  margin-bottom:12px;box-shadow:var(--shadow-md);
+}
+
+.speak-german{
+  font-size:1.7rem;font-weight:800;
+  color:var(--text);margin-bottom:8px;
+  letter-spacing:-0.03em;
+}
+
+.speak-english{
+  font-size:0.95rem;color:var(--text-muted);
+  margin-bottom:28px;
+}
+
+.mic-btn{
+  width:82px;height:82px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;font-size:2.1rem;
+  margin:0 auto;display:flex;
+  align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.2s;
+  box-shadow:var(--gold-glow),0 4px 18px rgba(0,0,0,0.3);
+  position:relative;
+}
+
+.mic-btn::before{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  border:2px solid rgba(245,166,35,0.18);
+  animation:mic-ring 2.5s ease-in-out infinite;
+}
+
+@keyframes mic-ring{
+  0%,100%{transform:scale(1);opacity:0.6}
+  50%{transform:scale(1.1);opacity:0.15}
+}
+
+.mic-btn:hover{
+  transform:scale(1.07);
+  box-shadow:0 0 36px rgba(245,166,35,0.45),0 6px 22px rgba(0,0,0,0.3);
+}
+
+.mic-btn.listening{
+  background:linear-gradient(135deg,#EF4444,#FF6B6B);
+  box-shadow:0 0 28px rgba(239,68,68,0.45),0 4px 18px rgba(0,0,0,0.3);
+  animation:mic-pulse 0.85s ease-in-out infinite alternate;
+}
+
+.mic-btn.listening::before{
+  border-color:rgba(239,68,68,0.25);
+  animation:mic-ring-red 0.85s ease-in-out infinite;
+}
+
+@keyframes mic-pulse{from{transform:scale(1)}to{transform:scale(1.07)}}
+@keyframes mic-ring-red{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.18);opacity:0.15}}
+
+.mic-status{
+  font-size:0.8rem;color:var(--text-muted);
+  margin-top:14px;font-weight:500;
+}
+
+.speak-result{
+  margin-top:16px;padding:13px 16px;
+  border-radius:var(--r-lg);
+  font-size:0.88rem;font-weight:500;line-height:1.55;
+}
+
+.speak-result.ok{
+  background:var(--green-dim);color:var(--green-text);
+  border:1px solid rgba(74,222,128,0.2);
+}
+
+.speak-result.no{
+  background:var(--red-dim);color:var(--red-text);
+  border:1px solid rgba(248,113,113,0.2);
+}
+
+.speak-tips-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:16px;
+  font-size:0.82rem;color:var(--text-sub);
+  line-height:1.8;margin-top:12px;
+  box-shadow:var(--shadow-sm);
+}
+
+/* =============================================
+   MULTIPLAYER
+   ============================================= */
+.lobby-code{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:30px 20px;text-align:center;
+  margin-bottom:16px;box-shadow:var(--shadow-md);
+}
+
+.room-code-big{
+  font-size:2.8rem;font-weight:800;
+  letter-spacing:0.55rem;color:var(--gold);
+  font-family:var(--mono);
+  text-shadow:0 0 30px rgba(245,166,35,0.35);
+  margin-bottom:6px;
+}
+
+.p-row{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 14px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  margin-bottom:6px;
+  box-shadow:var(--shadow-sm);
+  transition:border-color 0.15s;
+}
+
+.p-row:hover{border-color:var(--border-active)}
+
+.av{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.7rem;font-weight:800;flex-shrink:0;
+}
+
+.av-g{background:var(--gold-light);color:var(--gold)}
+.av-b{background:var(--blue-dim);color:var(--blue)}
+.av-gr{background:var(--green-dim);color:var(--green)}
+.av-p{background:var(--purple-dim);color:var(--purple)}
+
+.p-info{flex:1}
+.p-name{font-size:0.9rem;font-weight:600;color:var(--text)}
+.p-sub{font-size:0.7rem;color:var(--text-muted)}
+
+.ready-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+}
+
+.join-input{
+  flex:1;padding:12px 16px;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  font-size:0.95rem;
+  background:var(--surface);color:var(--text);
+  letter-spacing:0.2rem;font-family:var(--mono);
+  font-weight:700;outline:none;
+  transition:all 0.15s;
+}
+
+.join-input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(245,166,35,0.1);
+}
+
+.join-input::placeholder{color:var(--text-muted);letter-spacing:0;font-family:var(--font);font-weight:400}
+
+/* =============================================
+   QUIZ GAME
+   ============================================= */
+.topbar{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:14px;padding:10px 0;
+}
+
+.back-btn{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.85rem;color:var(--text-muted);cursor:pointer;
+  transition:all 0.15s;flex-shrink:0;
+  font-family:var(--font);
+}
+
+.back-btn:hover{border-color:var(--border-active);color:var(--text)}
+
+.prog-bar{
+  flex:1;height:6px;
+  background:var(--surface2);
+  border-radius:var(--r-full);overflow:hidden;
+}
+
+.prog-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--gold),#FFD060);
+  border-radius:var(--r-full);
+  transition:width 0.4s ease;
+}
+
+.timer-p{
+  min-width:44px;height:36px;
+  background:var(--surface2);color:var(--text);
+  font-size:0.9rem;font-weight:800;
+  padding:0 10px;border-radius:var(--r-md);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.3s;flex-shrink:0;
+  font-variant-numeric:tabular-nums;
+  font-family:var(--mono);
+}
+
+.timer-p.warn{
+  background:var(--red-dim);color:var(--red-text);
+  border:1px solid rgba(248,113,113,0.25);
+  animation:timer-warn 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes timer-warn{from{transform:scale(1)}to{transform:scale(1.09)}}
+
+.score-p{
+  background:var(--gold-light);color:var(--gold);
+  font-size:0.8rem;font-weight:800;
+  padding:0 13px;height:36px;
+  border-radius:var(--r-md);
+  display:flex;align-items:center;
+  white-space:nowrap;flex-shrink:0;
+  border:1px solid rgba(245,166,35,0.22);
+  font-family:var(--mono);
+}
+
+.lb-row{
+  display:flex;gap:6px;
+  padding:8px 12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-lg);margin-bottom:12px;
+  overflow-x:auto;
+}
+
+.lb-item{
+  display:flex;align-items:center;gap:5px;
+  background:var(--surface2);border-radius:var(--r-md);
+  padding:5px 10px;white-space:nowrap;
+  font-size:0.75rem;color:var(--text-sub);
+}
+
+.ai-loader{
+  text-align:center;padding:52px 20px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+
+.ai-loader-icon{
+  font-size:2.8rem;color:var(--purple);
+  animation:spin-slow 3s linear infinite;
+}
+
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.ai-loader-text{font-size:0.9rem;font-weight:600;color:var(--purple-text)}
+.ai-loader-sub{font-size:0.72rem;color:var(--text-muted)}
+
+.qcard{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-2xl);padding:22px;
+  margin-bottom:12px;box-shadow:var(--shadow-md);
+}
+
+.qtype{
+  font-size:0.62rem;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--text-muted);
+  margin-bottom:10px;font-weight:700;
+}
+
+.qtext{
+  font-size:1.15rem;font-weight:700;color:var(--text);
+  line-height:1.5;margin-bottom:6px;letter-spacing:-0.01em;
+}
+
+.qhint{font-size:0.8rem;color:var(--text-muted);font-style:italic}
+
+.choices{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:8px;margin-bottom:12px;
+}
+
+.ch{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:13px 12px;
+  font-size:0.88rem;color:var(--text-sub);
+  text-align:left;cursor:pointer;
+  transition:all 0.15s;
+  font-family:var(--font);
+  display:flex;align-items:center;gap:9px;
+  line-height:1.4;
+}
+
+.ch-label{
+  font-size:0.68rem;font-weight:800;
+  background:var(--surface2);color:var(--text-muted);
+  width:24px;height:24px;border-radius:7px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all 0.15s;font-family:var(--mono);
+}
+
+.ch:hover:not(:disabled){
+  border-color:var(--gold);
+  background:var(--gold-light);
+  color:var(--text);transform:translateY(-1px);
+  box-shadow:var(--shadow-sm);
+}
+
+.ch:hover:not(:disabled) .ch-label{
+  background:rgba(245,166,35,0.22);color:var(--gold);
+}
+
+.ch.ok{
+  border-color:rgba(74,222,128,0.4);
+  background:var(--green-dim);color:var(--green-text);
+}
+
+.ch.ok .ch-label{background:rgba(74,222,128,0.2);color:var(--green)}
+
+.ch.no{
+  border-color:rgba(248,113,113,0.4);
+  background:var(--red-dim);color:var(--red-text);
+}
+
+.ch.no .ch-label{background:rgba(248,113,113,0.2);color:var(--red)}
+
+.type-in{
+  width:100%;padding:13px 16px;
+  border:1px solid var(--border);border-radius:var(--r-lg);
+  font-size:1rem;background:var(--surface);color:var(--text);
+  margin-bottom:8px;outline:none;transition:all 0.15s;
+  font-family:var(--font);
+}
+
+.type-in:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(245,166,35,0.1);
+}
+
+.type-in::placeholder{color:var(--text-muted)}
+
+.sub-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;border:none;border-radius:var(--r-lg);
+  font-size:0.92rem;font-weight:800;cursor:pointer;
+  font-family:var(--font);transition:all 0.2s;
+  box-shadow:0 4px 14px rgba(245,166,35,0.28);
+  letter-spacing:-0.01em;
+}
+
+.sub-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.38)}
+
+.fb{
+  padding:13px 16px;border-radius:var(--r-lg);
+  margin-bottom:12px;
+  font-size:0.88rem;font-weight:600;
+  display:none;align-items:center;gap:8px;line-height:1.4;
+}
+
+.fb.show{display:flex;animation:fb-in 0.2s ease}
+@keyframes fb-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+
+.fb.ok{background:var(--green-dim);color:var(--green-text);border:1px solid rgba(74,222,128,0.22)}
+.fb.no{background:var(--red-dim);color:var(--red-text);border:1px solid rgba(248,113,113,0.22)}
+
+/* =============================================
+   RESULTS
+   ============================================= */
+.res-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-2xl);
+  padding:30px 20px;text-align:center;
+  margin-bottom:16px;box-shadow:var(--shadow-md);
+  position:relative;overflow:hidden;
+}
+
+.res-card::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 50% -10%,rgba(245,166,35,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+
+.res-icon{
+  font-size:3.8rem;margin-bottom:14px;display:block;
+  animation:pop-in 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+
+@keyframes pop-in{
+  from{transform:scale(0) rotate(-20deg);opacity:0}
+  to{transform:scale(1) rotate(0);opacity:1}
+}
+
+.res-card h2{
+  font-size:1.35rem;font-weight:800;
+  color:var(--text);margin-bottom:6px;letter-spacing:-0.02em;
+}
+
+.res-card>p{font-size:0.84rem;color:var(--text-muted)}
+
+.res-stats{display:flex;gap:10px;margin:20px 0 0}
+
+.rs{
+  flex:1;background:var(--surface2);
+  border-radius:var(--r-lg);padding:15px 10px;text-align:center;
+}
+
+.rs strong{
+  display:block;font-size:1.7rem;font-weight:900;
+  color:var(--text);letter-spacing:-0.04em;margin-bottom:4px;
+  font-variant-numeric:tabular-nums;
+}
+
+.rs span{
+  font-size:0.65rem;color:var(--text-muted);font-weight:700;
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+
+.ai-tip{
+  background:linear-gradient(135deg,var(--purple-dim),rgba(167,139,250,0.05));
+  border:1px solid rgba(167,139,250,0.2);
+  border-radius:var(--r-xl);padding:16px;
+  font-size:0.85rem;color:var(--purple-text);
+  margin-bottom:16px;min-height:64px;
+  line-height:1.75;box-shadow:var(--shadow-sm);
+}
+
+/* =============================================
+   COMMON BUTTONS
+   ============================================= */
+.btn-row{display:flex;gap:8px}
+
+.gold-btn{
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;border:none;border-radius:var(--r-lg);
+  font-size:0.92rem;font-weight:800;cursor:pointer;
+  font-family:var(--font);margin-bottom:8px;
+  transition:all 0.2s;
+  box-shadow:0 4px 18px rgba(245,166,35,0.28);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  letter-spacing:-0.01em;
+}
+
+.gold-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,166,35,0.4)}
+
+.out-btn{
+  flex:1;padding:12px;
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  background:var(--surface);
+  font-size:0.88rem;color:var(--text-sub);
+  cursor:pointer;font-family:var(--font);
+  font-weight:600;transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+.out-btn:hover{border-color:var(--border-active);color:var(--text)}
+
+.sol-btn{
+  flex:1;padding:12px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;border:none;border-radius:var(--r-lg);
+  font-size:0.88rem;font-weight:800;cursor:pointer;
+  font-family:var(--font);transition:all 0.2s;
+}
+
+.sol-btn:hover{transform:translateY(-1px)}
+
+/* =============================================
+   XP TOAST
+   ============================================= */
+.xp-toast{
+  position:fixed;top:20px;right:20px;
+  background:linear-gradient(135deg,var(--gold),#FFD060);
+  color:#1A1000;
+  font-size:0.82rem;font-weight:800;
+  padding:8px 18px;border-radius:var(--r-full);
+  box-shadow:var(--gold-glow),0 4px 20px rgba(0,0,0,0.35);
+  z-index:1000;
+  animation:toast-in 0.3s ease,toast-out 0.3s ease 1.7s forwards;
+  pointer-events:none;
+  font-family:var(--font);
+}
+
+@keyframes toast-in{
+  from{transform:translateX(80px) scale(0.8);opacity:0}
+  to{transform:translateX(0) scale(1);opacity:1}
+}
+
+@keyframes toast-out{
+  from{transform:translateX(0) scale(1);opacity:1}
+  to{transform:translateX(80px) scale(0.8);opacity:0}
+}
+
+/* =============================================
+   SCROLLBAR
+   ============================================= */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--border-active)}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media(max-width:480px){
+  .mode-grid{grid-template-columns:1fr}
+  .choices{grid-template-columns:1fr}
+  .stats-mini{gap:6px}
+  .day-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- German flag stripe -->
+<div class="flag-stripe"></div>
+
+<div class="app-wrapper">
+
+<!-- HEADER -->
+<div class="app-header">
+  <div class="brand">
+    <div class="brand-name">DeutschQuest Pro</div>
+    <div class="brand-badge">Goethe A1</div>
+  </div>
+  <div class="top-xp" id="top-xp">
+    <i class="ti ti-bolt"></i>
+    <span>XP: 0</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn act" onclick="goNav('dashboard',this)">
+    <i class="ti ti-layout-dashboard"></i>Home
+  </button>
+  <button class="nav-btn" onclick="goNav('challenge',this)">
+    <i class="ti ti-trophy"></i>20-Day
+  </button>
+  <button class="nav-btn" onclick="goNav('flashcards',this)">
+    <i class="ti ti-cards"></i>Cards
+  </button>
+  <button class="nav-btn" onclick="goNav('speak',this)">
+    <i class="ti ti-microphone"></i>Speak
+  </button>
+  <button class="nav-btn" onclick="goNav('multi',this)">
+    <i class="ti ti-users"></i>Versus
+  </button>
+</nav>
+
+<!-- =============================================
+     DASHBOARD
+     ============================================= -->
+<div class="screen active" id="screen-dashboard">
+  <div class="hero-strip">
+    <div class="hero-row">
+      <div class="xp-badge">
+        <strong id="xp-lvl">Lvl 1</strong>
+        <span>A1</span>
+      </div>
+      <div class="xp-bar-wrap">
+        <div class="xp-label">
+          <span>XP Progress</span>
+          <strong id="xp-val">0 / 500</strong>
+        </div>
+        <div class="xp-bar">
+          <div class="xp-fill" id="xp-fill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="streak-row">
+      <div class="streak-pill">
+        <i class="ti ti-flame" style="color:#FF6B35"></i>
+        <strong id="streak-num">0</strong>
+        <span>day streak</span>
+      </div>
+      <div class="streak-pill">
+        <i class="ti ti-calendar" style="color:var(--blue)"></i>
+        <span>Day <strong id="day-num">1</strong> of 20</span>
+      </div>
+      <div class="streak-pill">
+        <i class="ti ti-certificate" style="color:var(--green)"></i>
+        <span>Goethe A1</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-mini">
+    <div class="sbox">
+      <strong id="db-qs">0</strong>
+      <span>Questions</span>
+    </div>
+    <div class="sbox">
+      <strong id="db-acc">—</strong>
+      <span>Accuracy</span>
+    </div>
+    <div class="sbox">
+      <strong id="db-cards">0</strong>
+      <span>Words learned</span>
+    </div>
+  </div>
+
+  <p class="section-label">Choose a game mode</p>
+  <div class="mode-grid">
+    <div class="mcard mcard-ai" onclick="startAIQuiz()">
+      <div class="mcard-icon">🤖</div>
+      <h3>AI Quiz</h3>
+      <p>Fresh questions powered by Claude, tailored to your level</p>
+      <span class="mcard-badge badge-ai">AI-powered</span>
+    </div>
+    <div class="mcard mcard-challenge" onclick="goNav('challenge',null)">
+      <div class="mcard-icon">🏆</div>
+      <h3>20-Day Challenge</h3>
+      <p>Structured path to pass the Goethe A1 exam</p>
+      <span class="mcard-badge badge-exam">Exam prep</span>
+    </div>
+    <div class="mcard mcard-flash" onclick="goNav('flashcards',null)">
+      <div class="mcard-icon">🃏</div>
+      <h3>Flashcard Deck</h3>
+      <p>Spaced repetition to lock in 700+ A1 vocab words</p>
+      <span class="mcard-badge badge-new">SRS engine</span>
+    </div>
+    <div class="mcard mcard-speak" onclick="goNav('speak',null)">
+      <div class="mcard-icon">🎙️</div>
+      <h3>Pronunciation</h3>
+      <p>Speak German aloud — mic grades your accent live</p>
+      <span class="mcard-badge badge-new">Speech AI</span>
+    </div>
+    <div class="mcard mcard-versus" onclick="goNav('multi',null)">
+      <div class="mcard-icon">⚔️</div>
+      <h3>Challenge Friend</h3>
+      <p>Race friends in live multiplayer German rounds</p>
+      <span class="mcard-badge badge-live">Live</span>
+    </div>
+    <div class="mcard mcard-quick" onclick="startBuiltinQuiz()">
+      <div class="mcard-icon">⚡</div>
+      <h3>Quick Quiz</h3>
+      <p>10 questions instantly — no waiting, no AI needed</p>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     20-DAY CHALLENGE
+     ============================================= -->
+<div class="screen" id="screen-challenge">
+  <div class="challenge-hero">
+    <h2><i class="ti ti-trophy"></i>20-Day Goethe A1 Challenge</h2>
+    <p>Complete every day to be exam-ready. Goethe A1 tests Hören, Lesen, Schreiben, Sprechen — all covered.</p>
+  </div>
+  <div class="day-grid" id="day-grid"></div>
+  <div class="day-detail" id="day-detail"></div>
+</div>
+
+<!-- =============================================
+     FLASHCARDS
+     ============================================= -->
+<div class="screen" id="screen-flashcards">
+  <p class="section-label">Vocabulary deck — spaced repetition</p>
+  <div class="fc-cat-row" id="fc-cat-row"></div>
+  <div class="fc-progress" id="fc-prog"></div>
+  <div class="card-wrap">
+    <div class="flip-card" id="flip-card" onclick="flipCard()">
+      <div class="card-face card-front" id="card-front"></div>
+      <div class="card-face card-back" id="card-back"></div>
+    </div>
+  </div>
+  <div style="text-align:center;font-size:0.74rem;color:var(--text-muted);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:4px">
+    <i class="ti ti-hand-finger" style="font-size:0.95rem"></i>Tap card to reveal translation
+  </div>
+  <div class="srs-row" id="srs-btns" style="display:none">
+    <button class="srs-btn srs-hard" onclick="srsRate('hard')"><i class="ti ti-x"></i> Hard</button>
+    <button class="srs-btn srs-ok" onclick="srsRate('ok')"><i class="ti ti-minus"></i> Good</button>
+    <button class="srs-btn srs-easy" onclick="srsRate('easy')"><i class="ti ti-check"></i> Easy</button>
+  </div>
+</div>
+
+<!-- =============================================
+     SPEAK / PRONUNCIATION
+     ============================================= -->
+<div class="screen" id="screen-speak">
+  <p class="section-label">Pronunciation trainer</p>
+  <div class="speak-card" id="speak-card">
+    <div class="speak-german" id="spk-german">Guten Morgen</div>
+    <div class="speak-english" id="spk-english">Good morning</div>
+    <button class="mic-btn" id="mic-btn" onclick="toggleMic()" aria-label="Start recording">
+      <i class="ti ti-microphone"></i>
+    </button>
+    <div class="mic-status" id="mic-status">Tap mic to speak</div>
+    <div class="speak-result" id="spk-result" style="display:none"></div>
+  </div>
+  <div class="btn-row">
+    <button class="out-btn" onclick="prevSpeak()">
+      <i class="ti ti-arrow-left"></i> Prev
+    </button>
+    <button class="sol-btn" onclick="nextSpeak()">
+      Next <i class="ti ti-arrow-right"></i>
+    </button>
+  </div>
+  <div class="speak-tips-box">
+    <p class="section-label" style="margin-bottom:8px">Pronunciation tip</p>
+    <div id="speak-tips"></div>
+  </div>
+</div>
+
+<!-- =============================================
+     MULTIPLAYER
+     ============================================= -->
+<div class="screen" id="screen-multi">
+  <p class="section-label">Live multiplayer — compete with friends</p>
+  <div class="lobby-code">
+    <div class="room-code-big" id="mp-code">—</div>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;justify-content:center;gap:5px">
+      <i class="ti ti-share" style="font-size:0.85rem"></i>Share this code · friends join instantly
+    </p>
+  </div>
+  <div class="players-ul" id="mp-players"></div>
+  <div style="display:flex;gap:8px;margin-bottom:12px">
+    <input class="join-input" placeholder="Enter room code…" id="join-inp" maxlength="6" oninput="this.value=this.value.toUpperCase()"/>
+    <button
+      style="padding:0 22px;background:linear-gradient(135deg,var(--gold),#FFD060);color:#1A1000;border:none;border-radius:var(--r-lg);font-size:0.9rem;font-weight:800;cursor:pointer;font-family:var(--font);white-space:nowrap;transition:all 0.2s;box-shadow:0 4px 14px rgba(245,166,35,0.25)"
+      onclick="joinRoom()"
+      onmouseover="this.style.transform='translateY(-1px)'"
+      onmouseout="this.style.transform=''"
+    >Join</button>
+  </div>
+  <button class="gold-btn" onclick="startMulti()">
+    <i class="ti ti-player-play"></i>Start round as host
+  </button>
+</div>
+
+<!-- =============================================
+     QUIZ GAME
+     ============================================= -->
+<div class="screen" id="screen-game">
+  <div class="topbar">
+    <button class="back-btn" onclick="exitGame()">✕</button>
+    <div class="prog-bar"><div class="prog-fill" id="g-prog" style="width:0%"></div></div>
+    <div class="timer-p" id="g-timer">15</div>
+    <div class="score-p" id="g-score">0 pts</div>
+  </div>
+  <div class="lb-row" id="g-lb" style="display:none"></div>
+  <div id="g-ai-status" class="ai-loader" style="display:none">
+    <i class="ti ti-atom ai-loader-icon"></i>
+    <div class="ai-loader-text">Claude is generating your question…</div>
+    <div class="ai-loader-sub">Tailoring difficulty to your level</div>
+  </div>
+  <div class="qcard" id="g-qcard" style="display:none">
+    <div class="qtype" id="g-qtype"></div>
+    <div class="qtext" id="g-qtext"></div>
+    <div class="qhint" id="g-qhint"></div>
+  </div>
+  <div class="fb" id="g-fb"></div>
+  <div class="explanation" id="g-explain">
+    <div class="explanation-label"><i class="ti ti-bulb"></i>Why?</div>
+    <div id="g-explain-text"></div>
+  </div>
+  <div id="g-choices"></div>
+  <button id="g-next-btn" class="next-btn" onclick="nextQuestion()">
+    Next question <i class="ti ti-arrow-right"></i>
+  </button>
+</div>
+
+<!-- =============================================
+     RESULT
+     ============================================= -->
+<div class="screen" id="screen-result">
+  <div class="res-card" id="res-main"></div>
+  <p class="section-label">AI feedback on your session</p>
+  <div class="ai-tip" id="ai-tip">
+    <i class="ti ti-brain" style="margin-right:6px"></i>Analyzing your answers…
+  </div>
+  <div class="btn-row">
+    <button class="out-btn" onclick="goNav('dashboard',null)">
+      <i class="ti ti-home"></i> Menu
+    </button>
+    <button class="sol-btn" onclick="playAgain()">Play again</button>
+  </div>
+</div>
+
+</div><!-- /app-wrapper -->
+
+<script>
+// =============================================
+// DATA
+// =============================================
+const DAYS=[
+  {n:1,icon:"ti-sun",topic:"Greetings & alphabet",tasks:["Learn the German alphabet (26 letters + ä,ö,ü,ß)","Master Hallo, Guten Morgen, Guten Tag, Guten Abend, Tschüss","Practice: Wie heißt du? — Ich heiße…","Flashcard drill: 20 greeting words","Pronunciation: sch, ch, ie, ei sounds","Mini quiz: 10 greeting questions"]},
+  {n:2,icon:"ti-numbers",topic:"Numbers 1–100",tasks:["Learn numbers 1–20 by heart","Understand the pattern for 21–99 (einundzwanzig…)","Learn ordinal numbers (erste, zweite…)","Practice telling your age: Ich bin … Jahre alt.","Flashcard drill: numbers","Mini quiz: number listening & translation"]},
+  {n:3,icon:"ti-user",topic:"Personal introduction",tasks:["Learn name, age, country, city, job vocabulary","Full intro: Ich heiße…, Ich komme aus…, Ich wohne in…, Ich bin…","Learn Woher kommst du? / Wo wohnst du?","Countries & nationalities: Deutsch, Englisch, Nepali…","Flashcard: personal info words","Mini quiz: personal info dialogue"]},
+  {n:4,icon:"ti-building",topic:"Articles & gender (der/die/das)",tasks:["Learn the 3 genders: masculine (der), feminine (die), neuter (das)","Learn nominative articles: der/die/das, ein/eine/ein","Practice: Das ist ein/eine/ein…","20 nouns with correct articles","Flashcard: common nouns + articles","Mini quiz: fill the correct article"]},
+  {n:5,icon:"ti-home",topic:"Family & relationships",tasks:["Family vocab: Mutter, Vater, Bruder, Schwester, Großeltern…","Possessive pronouns: mein/meine, dein/deine","Sentences: Mein Vater heißt…, Ich habe … Geschwister","Dialog practice: Talking about family","Flashcard: family words","Mini quiz: family comprehension"]},
+  {n:6,icon:"ti-clock",topic:"Time & daily routine",tasks:["Hours: Es ist ein Uhr, halb drei, Viertel nach vier…","Days of week: Montag bis Sonntag","Daily verbs: aufstehen, frühstücken, arbeiten, schlafen","Sentence: Ich stehe um … auf. Um … esse ich Frühstück.","Flashcard: time expressions","Mini quiz: time & schedule questions"]},
+  {n:7,icon:"ti-salad",topic:"Food & drinks",tasks:["Food vocab: Brot, Käse, Fleisch, Obst, Gemüse, Wasser, Kaffee…","Ordering: Ich hätte gern… / Ich möchte… / Was kostet das?","Prices in German: Es kostet zwei Euro fünfzig.","Dialog: café/restaurant ordering","Flashcard: food & drink words","Mini quiz: menu reading & ordering"]},
+  {n:8,icon:"ti-map-pin",topic:"Places & directions",tasks:["Places: Bahnhof, Supermarkt, Krankenhaus, Bank, Schule…","Directions: links, rechts, geradeaus, die zweite Straße…","Asking: Wo ist…? / Wie komme ich zu…?","Prepositions: in, an, auf, neben, vor, hinter","Flashcard: places & directions","Mini quiz: map reading & directions"]},
+  {n:9,icon:"ti-shopping-cart",topic:"Shopping",tasks:["Clothes & color vocab: rot, blau, groß, klein, billig, teuer","Shopping dialog: Was kostet…? Haben Sie…? Ich nehme…","Sizes & quantities","Adjective agreement basics (masculine/feminine/neuter)","Flashcard: shopping vocab","Mini quiz: shopping dialog comprehension"]},
+  {n:10,icon:"ti-train",topic:"Transport & travel",tasks:["Transport: Bus, Zug, U-Bahn, Auto, Fahrrad, Flugzeug","Tickets: Einmal nach…, hin und zurück, einfach","Timetables: Wann fährt der nächste Zug?","Days & months: Januar bis Dezember","Flashcard: travel vocab","Day 10 checkpoint quiz — 25 questions!"]},
+  {n:11,icon:"ti-school",topic:"School & work",tasks:["School vocab: Schule, Universität, Lehrer, Schüler, Fach…","Jobs: Arzt, Lehrer, Ingenieur, Koch, Verkäufer…","Sentences: Ich arbeite als…, Ich lerne…","Work verbs: arbeiten, lernen, studieren, schreiben, lesen","Flashcard: school & work vocab","Mini quiz: job & school dialog"]},
+  {n:12,icon:"ti-activity",topic:"Hobbies & free time",tasks:["Hobbies: Fußball spielen, lesen, kochen, reisen, schwimmen…","Modal verbs: können, mögen, möchten, müssen","I like / I don't like: Ich mag…, Ich mag … nicht","Sentence: Was machst du gern in der Freizeit?","Flashcard: hobbies & leisure","Mini quiz: free time preferences"]},
+  {n:13,icon:"ti-heartbeat",topic:"Health & body",tasks:["Body parts: Kopf, Hand, Fuß, Bauch, Rücken, Zahn…","Health phrases: Ich bin krank. Ich habe Kopfschmerzen. Mir geht es nicht gut.","At the doctor: Was fehlt Ihnen? / Tut das weh?","Verbs: schmerzen, weh tun, fühlen","Flashcard: health & body words","Mini quiz: health dialog"]},
+  {n:14,icon:"ti-weather-sunny",topic:"Weather & seasons",tasks:["Weather: Es regnet. Es schneit. Es ist sonnig/bewölkt/windig.","Seasons: Frühling, Sommer, Herbst, Winter","Temperatures: Es ist 20 Grad.","Asking: Wie ist das Wetter?","Flashcard: weather words","Mini quiz: weather description"]},
+  {n:15,icon:"ti-writing",topic:"Writing & Goethe Schreiben",tasks:["Goethe A1 writing format: Formular ausfüllen (fill forms)","Short messages: SMS, Postkarte, E-Mail (25–30 words)","Connectors: und, aber, oder, denn, weil (basic)","Address & contact form practice","Write 3 short messages to a friend","Correction drill: spot grammar errors"]},
+  {n:16,icon:"ti-headphones",topic:"Listening — Goethe Hören",tasks:["Goethe Hören format: 3 parts, recorded dialogs","Part 1: short announcements (Ansagen)","Part 2: short conversations — choose the right image","Part 3: longer dialog — true/false/not mentioned","Listening comprehension strategies","5 full Goethe-style listening exercises"]},
+  {n:17,icon:"ti-book",topic:"Reading — Goethe Lesen",tasks:["Goethe Lesen format: 3 parts, authentic texts","Part 1: short ads, signs — choose true/false","Part 2: short messages — match person to text","Part 3: fill-in-the-blank notice","Scan reading vs. close reading strategies","5 full Goethe-style reading exercises"]},
+  {n:18,icon:"ti-microphone",topic:"Speaking — Goethe Sprechen",tasks:["Goethe Sprechen: 3 tasks — introduce yourself, ask & answer, act out situations","Task 1: Sich vorstellen (introduce yourself in full)","Task 2: Fragen stellen (ask about name, age, job, city)","Task 3: Situation (buying, asking direction, in doctor's)","Record yourself speaking each task","Peer grading rubric practice"]},
+  {n:19,icon:"ti-refresh",topic:"Full mock exam",tasks:["Goethe A1 full mock: Hören 20 min (15 questions)","Goethe A1 full mock: Lesen 25 min (20 questions)","Goethe A1 full mock: Schreiben 20 min (2 writing tasks)","Goethe A1 full mock: Sprechen 15 min (3 speaking tasks)","Self-score against official Goethe rubric","Identify weak areas and review relevant days"]},
+  {n:20,icon:"ti-certificate",topic:"Final review & exam day",tasks:["Quick-fire 50-question final quiz — all topics","Review all flashcards marked 'hard'","Pronunciation final drill: all difficult sounds","Check travel + logistics for exam day","Confidence boost: review your Day 1 vs today progress","You are ready — Viel Erfolg bei der Prüfung!"]}
+];
+
+const VOCAB_CATS={
+  "Greetings":[
+    {de:"Hallo",en:"Hello",pos:"interjection",ex:"Hallo, wie geht es dir?"},
+    {de:"Guten Morgen",en:"Good morning",pos:"phrase",ex:"Guten Morgen! Wie war dein Schlaf?"},
+    {de:"Guten Tag",en:"Good day",pos:"phrase",ex:"Guten Tag, ich bin Anna."},
+    {de:"Guten Abend",en:"Good evening",pos:"phrase",ex:"Guten Abend, bitte nehmen Sie Platz."},
+    {de:"Tschüss",en:"Bye",pos:"interjection",ex:"Tschüss! Bis morgen!"},
+    {de:"Auf Wiedersehen",en:"Goodbye (formal)",pos:"phrase",ex:"Auf Wiedersehen, Herr Müller."},
+    {de:"Bitte",en:"Please / You're welcome",pos:"adverb",ex:"Bitte gib mir das Buch."},
+    {de:"Danke",en:"Thank you",pos:"interjection",ex:"Danke für deine Hilfe!"},
+    {de:"Entschuldigung",en:"Excuse me / Sorry",pos:"interjection",ex:"Entschuldigung, wo ist die Toilette?"}
+  ],
+  "Numbers":[
+    {de:"eins",en:"one",pos:"numeral",ex:"Ich habe eins."},
+    {de:"zwei",en:"two",pos:"numeral",ex:"Zwei Kaffee bitte."},
+    {de:"drei",en:"three",pos:"numeral",ex:"Ich habe drei Geschwister."},
+    {de:"vier",en:"four",pos:"numeral",ex:"Es ist vier Uhr."},
+    {de:"fünf",en:"five",pos:"numeral",ex:"Fünf Euro, bitte."},
+    {de:"zehn",en:"ten",pos:"numeral",ex:"Ich bin zehn Jahre alt."},
+    {de:"zwanzig",en:"twenty",pos:"numeral",ex:"Zwanzig Minuten."},
+    {de:"hundert",en:"one hundred",pos:"numeral",ex:"Das kostet hundert Euro."}
+  ],
+  "Family":[
+    {de:"die Mutter",en:"the mother",pos:"noun (f)",ex:"Meine Mutter heißt Petra."},
+    {de:"der Vater",en:"the father",pos:"noun (m)",ex:"Mein Vater ist Arzt."},
+    {de:"der Bruder",en:"the brother",pos:"noun (m)",ex:"Ich habe einen Bruder."},
+    {de:"die Schwester",en:"the sister",pos:"noun (f)",ex:"Meine Schwester ist jung."},
+    {de:"die Großmutter",en:"the grandmother",pos:"noun (f)",ex:"Meine Großmutter kocht gut."},
+    {de:"der Sohn",en:"the son",pos:"noun (m)",ex:"Das ist mein Sohn."},
+    {de:"die Tochter",en:"the daughter",pos:"noun (f)",ex:"Meine Tochter studiert Medizin."}
+  ],
+  "Food":[
+    {de:"das Brot",en:"the bread",pos:"noun (n)",ex:"Ich esse Brot zum Frühstück."},
+    {de:"der Kaffee",en:"the coffee",pos:"noun (m)",ex:"Ich trinke jeden Morgen Kaffee."},
+    {de:"das Wasser",en:"the water",pos:"noun (n)",ex:"Ein Glas Wasser, bitte."},
+    {de:"der Apfel",en:"the apple",pos:"noun (m)",ex:"Ein Apfel am Tag."},
+    {de:"das Fleisch",en:"the meat",pos:"noun (n)",ex:"Ich esse kein Fleisch."},
+    {de:"der Käse",en:"the cheese",pos:"noun (m)",ex:"Ich mag Käse sehr."},
+    {de:"das Ei",en:"the egg",pos:"noun (n)",ex:"Zwei Eier bitte."}
+  ],
+  "Places":[
+    {de:"der Bahnhof",en:"the train station",pos:"noun (m)",ex:"Wo ist der Bahnhof?"},
+    {de:"das Krankenhaus",en:"the hospital",pos:"noun (n)",ex:"Das Krankenhaus ist links."},
+    {de:"die Schule",en:"the school",pos:"noun (f)",ex:"Die Schule beginnt um 8 Uhr."},
+    {de:"der Supermarkt",en:"the supermarket",pos:"noun (m)",ex:"Ich gehe in den Supermarkt."},
+    {de:"die Bank",en:"the bank",pos:"noun (f)",ex:"Die Bank ist geradeaus."},
+    {de:"das Hotel",en:"the hotel",pos:"noun (n)",ex:"Das Hotel ist sehr schön."}
+  ]
+};
+
+const SPEAK_PHRASES=[
+  {de:"Guten Morgen",en:"Good morning",tips:"'g' is like English 'g'. 'gu-ten MOR-gen'. Roll the r softly."},
+  {de:"Wie heißt du?",en:"What is your name?",tips:"'ei' sounds like English 'eye'. 'Wie' = 'vee'. 'heißt' = 'hysst'."},
+  {de:"Ich bin Student.",en:"I am a student.",tips:"'ich' — the 'ch' is soft, like 'hh' in the back of throat. 'bin' = 'bin'."},
+  {de:"Wo ist der Bahnhof?",en:"Where is the train station?",tips:"'W' in German sounds like English 'V'. 'Bahn' = 'baan'. 'hof' = 'hoff'."},
+  {de:"Entschuldigung!",en:"Excuse me!",tips:"Break it: ent-SCHUL-di-gung. 'sch' = 'sh'. Long word but common!"},
+  {de:"Ich möchte einen Kaffee.",en:"I would like a coffee.",tips:"'ö' = round your lips like 'o' and say 'e'. 'möchte' = 'mœh-teh'."},
+  {de:"Auf Wiedersehen!",en:"Goodbye!",tips:"'Auf' = 'owf'. 'Wieder' = 'VEE-der'. 'sehen' = 'ZAY-en'."},
+  {de:"Das ist sehr schön.",en:"That is very beautiful.",tips:"'sehr' = 'zayr'. 'schön' = 'shœn'. The ö is key here — round those lips!"},
+  {de:"Ich komme aus Nepal.",en:"I come from Nepal.",tips:"'komme' = 'KOM-eh'. 'aus' = 'owss'. Clear and steady."},
+  {de:"Wie viel kostet das?",en:"How much does this cost?",tips:"'viel' = 'feel'. 'kostet' = 'KOS-tet'. Natural rising tone on 'das'."}
+];
+
+const BUILTIN_QS={
+  a1:[
+    {type:"mc",typeLabel:"Translate to German",q:"Good morning",hint:"Morning greeting",choices:["Guten Morgen","Gute Nacht","Guten Abend","Auf Wiedersehen"],ans:0,
+     explanation:"'Guten Morgen' = Good morning. German greetings follow the time of day: Morgen (morning), Tag (day/afternoon), Abend (evening). 'Gute Nacht' is only used at bedtime, not as a greeting."},
+    {type:"mc",typeLabel:"What does this mean?",q:"Wie heißt du?",hint:"A question",choices:["Where do you live?","How old are you?","What is your name?","How are you?"],ans:2,
+     explanation:"'Wie heißt du?' literally means 'How are you called?' — it asks for someone's name. 'heißen' = to be called/named. The formal version is 'Wie heißen Sie?' (with Sie instead of du)."},
+    {type:"mc",typeLabel:"Correct article?",q:"___ Buch (the book — neuter)",hint:"der / die / das",choices:["Der","Die","Das","Ein"],ans:2,
+     explanation:"'das Buch' — Buch (book) is neuter in German, so it takes 'das'. The three genders use different definite articles: der (masculine), die (feminine), das (neuter). You must memorize the gender with each noun."},
+    {type:"mc",typeLabel:"Fill in the blank",q:"Ich ___ Student.",hint:"I am a student",choices:["haben","sein","bin","ist"],ans:2,
+     explanation:"'bin' is the first-person singular (ich) form of 'sein' (to be). Conjugation: ich bin, du bist, er/sie/es ist, wir sind. 'Haben' means 'to have' — a completely different verb."},
+    {type:"mc",typeLabel:"What color?",q:"🍌 Die Banane ist ___.",hint:"Bananas are…",choices:["rot","blau","gelb","grün"],ans:2,
+     explanation:"'gelb' = yellow. Color vocabulary: rot (red), blau (blue), gelb (yellow), grün (green), weiß (white), schwarz (black). Colors don't change form when used as predicates after 'ist'."},
+    {type:"mc",typeLabel:"Translate",q:"Thank you / Please",hint:"Politeness essentials",choices:["Hallo / Tschüss","Danke / Bitte","Ja / Nein","Ich / Du"],ans:1,
+     explanation:"'Danke' = Thank you, 'Bitte' = Please (also 'You're welcome' and 'Here you go'). 'Bitte' is very flexible in German — it's one of the most useful words you'll use daily!"},
+    {type:"type",typeLabel:"Type in German",q:"How do you say the number 7?",hint:"Zahlen",ans:"sieben",
+     explanation:"'sieben' = 7. Key numbers to know: eins (1), zwei (2), drei (3), vier (4), fünf (5), sechs (6), sieben (7), acht (8), neun (9), zehn (10). Numbers are essential for time, prices, and dates."},
+    {type:"mc",typeLabel:"What does 'Entschuldigung' mean?",q:"Entschuldigung!",hint:"Said when bumping into someone",choices:["Goodbye!","Help!","Excuse me!","Thank you!"],ans:2,
+     explanation:"'Entschuldigung' = Excuse me / Sorry. It comes from 'Schuld' (guilt/fault). You use it to apologize, get someone's attention, or squeeze past people. A shorter version: 'Entschuldige!' (informal)."},
+    {type:"mc",typeLabel:"Correct verb?",q:"Wir ___ in Berlin.",hint:"We live in Berlin.",choices:["wohne","wohnst","wohnen","wohnt"],ans:2,
+     explanation:"'wohnen' (to live/reside) conjugates: ich wohne, du wohnst, er/sie wohnt, wir wohnen, ihr wohnt, sie wohnen. For 'wir' (we), you always use the infinitive form — a helpful pattern to remember!"},
+    {type:"mc",typeLabel:"Translate",q:"The train station is on the left.",hint:"Directions",choices:["Der Bahnhof ist links.","Der Bahnhof ist rechts.","Der Bahnhof ist oben.","Der Bahnhof ist geradeaus."],ans:0,
+     explanation:"'links' = left, 'rechts' = right, 'geradeaus' = straight ahead, 'oben' = up/above. 'Der Bahnhof' = the train station (masculine). Direction words are critical for the Goethe A1 Hören exam section."},
+    {type:"mc",typeLabel:"Family word",q:"'die Schwester' means?",hint:"Family member",choices:["mother","daughter","sister","grandmother"],ans:2,
+     explanation:"'die Schwester' = sister (feminine noun, uses 'die'). Family: die Mutter (mother), der Vater (father), der Bruder (brother), die Schwester (sister), die Großmutter (grandmother), der Großvater (grandfather)."},
+    {type:"mc",typeLabel:"Correct past tense",q:"Ich ___ gestern ins Kino gegangen.",hint:"I went to the cinema yesterday",choices:["bin","habe","hatte","war"],ans:0,
+     explanation:"'bin gegangen' uses Perfekt tense with 'sein' as the auxiliary. Verbs of motion (gehen, kommen, fahren) take 'sein', not 'haben'. Pattern: ich bin + past participle. 'gegangen' is the past participle of 'gehen' (to go)."}
+  ]
+};
+
+// =============================================
+// STATE
+// =============================================
+let state={
+  xp:0,streak:0,day:1,questionsTotal:0,questionsCorrect:0,wordsLearned:0,
+  tasksDone:{},fcCat:"Greetings",fcIdx:0,fcFlipped:false,
+  spkIdx:0,listening:false,
+  mpPlayers:[],mpScores:{},
+  gameMode:"builtin",gameIsMulti:false,
+  qList:[],qIdx:0,score:0,timer:null,timeLeft:15,answered:false,totalQ:10,
+  currentQ:null,prevScreen:"dashboard"
+};
+
+function save(){try{localStorage.setItem("dq_state",JSON.stringify(state))}catch(e){}}
+function load(){try{const s=localStorage.getItem("dq_state");if(s)state=Object.assign(state,JSON.parse(s))}catch(e){}}
+load();
+
+// =============================================
+// NAVIGATION
+// =============================================
+function goNav(id,btn){
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("act"));
+  if(btn) btn.classList.add("act");
+  else{
+    const btns=document.querySelectorAll(".nav-btn");
+    const map={dashboard:0,challenge:1,flashcards:2,speak:3,multi:4};
+    if(map[id]!==undefined) btns[map[id]].classList.add("act");
+  }
+  showScreen(id);
+  if(id==="dashboard") refreshDashboard();
+  if(id==="challenge") renderChallenge();
+  if(id==="flashcards") renderFlashcard();
+  if(id==="speak") renderSpeak();
+  if(id==="multi") renderMulti();
+}
+
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  const el=document.getElementById("screen-"+id);
+  if(el) el.classList.add("active");
+}
+
+// =============================================
+// DASHBOARD
+// =============================================
+function refreshDashboard(){
+  const lvl=Math.floor(state.xp/500)+1;
+  const xpInLvl=state.xp%500;
+  document.getElementById("xp-lvl").textContent="Lvl "+lvl;
+  document.getElementById("xp-val").textContent=xpInLvl+" / 500";
+  document.getElementById("xp-fill").style.width=Math.round(xpInLvl/500*100)+"%";
+  document.getElementById("top-xp").innerHTML='<i class="ti ti-bolt"></i><span>XP: '+state.xp+'</span>';
+  document.getElementById("streak-num").textContent=state.streak;
+  document.getElementById("day-num").textContent=state.day;
+  document.getElementById("db-qs").textContent=state.questionsTotal;
+  const acc=state.questionsTotal?Math.round(state.questionsCorrect/state.questionsTotal*100)+"%":"—";
+  document.getElementById("db-acc").textContent=acc;
+  document.getElementById("db-cards").textContent=state.wordsLearned;
+}
+
+function addXP(pts){
+  state.xp+=pts;
+  document.getElementById("top-xp").innerHTML='<i class="ti ti-bolt"></i><span>XP: '+state.xp+'</span>';
+  showXPToast("+"+pts+" XP");
+  save();
+}
+
+function showXPToast(msg){
+  const t=document.createElement("div");
+  t.className="xp-toast";t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2200);
+}
+
+// =============================================
+// 20-DAY CHALLENGE
+// =============================================
+function renderChallenge(){
+  const grid=document.getElementById("day-grid");
+  grid.innerHTML=DAYS.map(d=>{
+    const done=state.tasksDone[d.n]&&state.tasksDone[d.n].length>=d.tasks.length;
+    const today=d.n===state.day;
+    const locked=d.n>state.day;
+    return `<div class="day-cell ${done?"done":today?"today":locked?"locked":""}" onclick="${locked?"":"openDay("+d.n+")"}">
+      <div class="day-num">Day ${d.n}</div>
+      <div class="day-icon"><i class="ti ${d.icon}" style="color:${done?"var(--green)":today?"var(--gold)":"var(--text-muted)"}"></i></div>
+      <div class="day-topic">${d.topic}</div>
+    </div>`;
+  }).join("");
+  openDay(state.day);
+}
+
+function openDay(n){
+  const d=DAYS.find(x=>x.n===n);
+  if(!d) return;
+  const done=state.tasksDone[n]||[];
+  const isLocked=n>state.day;
+  const detail=document.getElementById("day-detail");
+  detail.innerHTML=`
+    <h3>Day ${n}: ${d.topic}</h3>
+    <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:4px">${isLocked?"Unlock by completing previous days":"Click tasks to mark complete — then start the quiz!"}</p>
+    <ul class="task-list">${d.tasks.map((t,i)=>`
+      <li class="task-row">
+        <div class="task-check ${done.includes(i)?"done":""}" onclick="${isLocked?"":"toggleTask("+n+","+i+")"}" role="checkbox" aria-checked="${done.includes(i)}">
+          ${done.includes(i)?'<i class="ti ti-check"></i>':""}
+        </div>
+        <span style="${done.includes(i)?"text-decoration:line-through;color:var(--text-muted)":""}">
+          ${isLocked?'<i class="ti ti-lock" style="font-size:11px;margin-right:4px;color:var(--text-muted)"></i>':""}${t}
+        </span>
+      </li>`).join("")}
+    </ul>
+    ${!isLocked?`<button class="start-day-btn" onclick="startDayQuiz(${n})">
+      Start Day ${n} quiz <i class="ti ti-arrow-right"></i>
+    </button>`:""}
+  `;
+}
+
+function toggleTask(day,idx){
+  if(!state.tasksDone[day]) state.tasksDone[day]=[];
+  const arr=state.tasksDone[day];
+  const pos=arr.indexOf(idx);
+  if(pos>-1) arr.splice(pos,1);
+  else{arr.push(idx);addXP(10);}
+  const d=DAYS.find(x=>x.n===day);
+  if(d&&arr.length>=d.tasks.length&&day===state.day){
+    state.day=Math.min(20,state.day+1);
+    state.streak++;addXP(100);
+  }
+  save();openDay(day);renderChallenge();
+}
+
+function startDayQuiz(n){
+  state.gameMode="builtin";state.gameIsMulti=false;state.prevScreen="challenge";
+  startGame();
+}
+
+// =============================================
+// FLASHCARDS
+// =============================================
+const FC_CATS=Object.keys(VOCAB_CATS);
+
+function renderFlashcard(){
+  const catRow=document.getElementById("fc-cat-row");
+  catRow.innerHTML=FC_CATS.map(c=>`<div class="cat-chip ${state.fcCat===c?"act":""}" onclick="setFcCat('${c}')">${c}</div>`).join("");
+  showCard();
+}
+
+function setFcCat(c){state.fcCat=c;state.fcIdx=0;state.fcFlipped=false;renderFlashcard();}
+
+function showCard(){
+  const words=VOCAB_CATS[state.fcCat];
+  const w=words[state.fcIdx%words.length];
+  const total=words.length;
+  document.getElementById("fc-prog").textContent=`Card ${(state.fcIdx%total)+1} of ${total}  ·  ${state.fcCat}`;
+  const front=document.getElementById("card-front");
+  const back=document.getElementById("card-back");
+  front.innerHTML=`
+    <div class="card-pos">${w.pos}</div>
+    <div class="card-german">${w.de}</div>
+    <div class="card-tap-hint"><i class="ti ti-rotate-clockwise" style="font-size:0.85rem"></i>Tap to reveal</div>
+  `;
+  back.innerHTML=`
+    <div class="card-english">${w.en}</div>
+    <div class="card-example">"${w.ex}"</div>
+  `;
+  const fc=document.getElementById("flip-card");
+  fc.classList.remove("flipped");
+  state.fcFlipped=false;
+  document.getElementById("srs-btns").style.display="none";
+}
+
+function flipCard(){
+  const fc=document.getElementById("flip-card");
+  if(!state.fcFlipped){
+    fc.classList.add("flipped");
+    state.fcFlipped=true;
+    document.getElementById("srs-btns").style.display="flex";
+  }
+}
+
+function srsRate(r){
+  if(r==="easy"){state.wordsLearned++;addXP(5);}
+  if(r==="hard") addXP(2);
+  if(r==="ok") addXP(3);
+  state.fcIdx++;
+  save();showCard();renderFlashcard();
+}
+
+// =============================================
+// PRONUNCIATION
+// =============================================
+function renderSpeak(){
+  const p=SPEAK_PHRASES[state.spkIdx];
+  document.getElementById("spk-german").textContent=p.de;
+  document.getElementById("spk-english").textContent=p.en;
+  document.getElementById("spk-result").style.display="none";
+  document.getElementById("mic-status").textContent="Tap mic to speak";
+  document.getElementById("mic-btn").className="mic-btn";
+  document.getElementById("speak-tips").innerHTML=`<strong style="color:var(--text)">${p.tips.split('.')[0]}.</strong> ${p.tips.split('.').slice(1).join('.')}`;
+}
+
+function prevSpeak(){if(state.spkIdx>0){state.spkIdx--;renderSpeak();}}
+function nextSpeak(){if(state.spkIdx<SPEAK_PHRASES.length-1){state.spkIdx++;renderSpeak();}}
+
+function toggleMic(){
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+    const res=document.getElementById("spk-result");
+    res.style.display="block";res.className="speak-result ok";
+    res.textContent="Speech API not available in this browser. Try Chrome. Tip: practice saying '"+SPEAK_PHRASES[state.spkIdx].de+"' out loud!";
+    return;
+  }
+  if(state.listening) return;
+  state.listening=true;
+  const btn=document.getElementById("mic-btn");
+  btn.className="mic-btn listening";
+  document.getElementById("mic-status").textContent="Listening… speak now!";
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const recog=new SR();
+  recog.lang="de-DE";recog.continuous=false;recog.interimResults=false;
+  recog.onresult=function(e){
+    const said=(e.results[0][0].transcript||"").toLowerCase().trim();
+    const target=SPEAK_PHRASES[state.spkIdx].de.toLowerCase().trim();
+    const conf=e.results[0][0].confidence;
+    const ws=said.split(/\s+/);
+    const wt=target.split(/\s+/);
+    const match=wt.filter(w=>ws.some(s=>s.includes(w)||w.includes(s))).length;
+    const score=match/wt.length;
+    const res=document.getElementById("spk-result");
+    res.style.display="block";
+    if(score>=0.7||conf>0.8){
+      res.className="speak-result ok";
+      res.textContent="Ausgezeichnet! You said: '"+said+"' — great pronunciation! +20 XP";
+      addXP(20);
+    } else {
+      res.className="speak-result no";
+      res.textContent="You said: '"+said+"'. Target: '"+SPEAK_PHRASES[state.spkIdx].de+"'. Keep practicing!";
+    }
+    state.listening=false;
+    btn.className="mic-btn";
+    document.getElementById("mic-status").textContent="Tap mic to try again";
+  };
+  recog.onerror=function(){
+    state.listening=false;
+    btn.className="mic-btn";
+    document.getElementById("mic-status").textContent="Could not hear you — try again";
+  };
+  recog.start();
+}
+
+// =============================================
+// MULTIPLAYER
+// =============================================
+function renderMulti(){
+  const code=Math.random().toString(36).substring(2,8).toUpperCase();
+  document.getElementById("mp-code").textContent=code;
+  state.mpPlayers=[
+    {name:"You (host)",ini:"YO",av:"av-g"},
+    {name:"Anna M.",ini:"AM",av:"av-b"},
+    {name:"Tom K.",ini:"TK",av:"av-gr"}
+  ];
+  state.mpScores={};
+  state.mpPlayers.forEach(p=>{state.mpScores[p.name]=0;});
+  renderMPList();
+  setTimeout(()=>{
+    state.mpPlayers.push({name:"Priya S.",ini:"PS",av:"av-p"});
+    state.mpScores["Priya S."]=0;
+    renderMPList();
+  },1800);
+}
+
+function renderMPList(){
+  document.getElementById("mp-players").innerHTML=state.mpPlayers.map(p=>`
+    <div class="p-row">
+      <div class="av ${p.av}">${p.ini}</div>
+      <div class="p-info">
+        <div class="p-name">${p.name}</div>
+        <div class="p-sub">A1 level · Ready</div>
+      </div>
+      <div class="ready-dot"></div>
+    </div>`).join("");
+}
+
+function joinRoom(){
+  const code=document.getElementById("join-inp").value.trim();
+  if(code.length<4) return;
+  document.getElementById("mp-code").textContent=code;
+  document.getElementById("join-inp").value="";
+}
+
+function startMulti(){
+  state.gameIsMulti=true;state.gameMode="builtin";state.prevScreen="multi";
+  startGame();
+}
+
+// =============================================
+// QUIZ
+// =============================================
+function startAIQuiz(){
+  state.gameMode="ai";state.gameIsMulti=false;state.prevScreen="dashboard";startGame();
+}
+
+function startBuiltinQuiz(){
+  state.gameMode="builtin";state.gameIsMulti=false;state.prevScreen="dashboard";startGame();
+}
+
+function startGame(){
+  state.score=0;state.qIdx=0;state.answered=false;state.currentQ=null;state.aiTopicsUsed=[];
+  state.qList=shuffle([...BUILTIN_QS.a1]);
+  state.totalQ=Math.min(state.qList.length,10);
+  showScreen("game");
+  const lb=document.getElementById("g-lb");
+  lb.style.display=state.gameIsMulti?"flex":"none";
+  if(state.gameMode==="ai") loadAIQuestion();
+  else loadQuestion();
+}
+
+function exitGame(){clearInterval(state.timer);goNav(state.prevScreen,null);}
+
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function updateTopbar(){
+  document.getElementById("g-prog").style.width=Math.round(state.qIdx/state.totalQ*100)+"%";
+  document.getElementById("g-score").textContent=state.score+" pts";
+}
+
+async function loadAIQuestion(){
+  clearInterval(state.timer);
+  document.getElementById("g-ai-status").style.display="flex";
+  document.getElementById("g-qcard").style.display="none";
+  document.getElementById("g-choices").innerHTML="";
+  document.getElementById("g-fb").className="fb";
+  document.getElementById("g-explain").className="explanation";
+  document.getElementById("g-next-btn").className="next-btn";
+  updateTopbar();
+
+  const A1_TOPICS=["greetings & introductions","numbers & time","articles & noun gender (der/die/das)","verb conjugation (sein, haben, modal verbs)","family vocabulary","food & ordering in a café","places & giving directions","colours & adjectives","daily routine & separable verbs","shopping & prices","transport & travel","Perfekt tense (past)"];
+  const usedTopics=state.aiTopicsUsed||[];
+  const remaining=A1_TOPICS.filter(t=>!usedTopics.includes(t));
+  const topicPool=remaining.length>0?remaining:A1_TOPICS;
+  const topic=topicPool[Math.floor(Math.random()*topicPool.length)];
+  if(!state.aiTopicsUsed) state.aiTopicsUsed=[];
+  state.aiTopicsUsed.push(topic);
+  const prompt=`You are a German language quiz generator for English speakers learning A1 level German (Goethe exam prep). Generate ONE quiz question in this EXACT JSON format:
+{"typeLabel":"Translate to German","q":"Good morning","hint":"Morning greeting","type":"mc","choices":["Guten Morgen","Gute Nacht","Guten Abend","Auf Wiedersehen"],"ans":0,"explanation":"'Guten Morgen' means Good morning. German greetings change by time of day: Morgen (morning), Tag (day), Abend (evening)."}
+
+Rules: type must be "mc" (multiple choice) with 4 choices and ans as index 0-3. Topic for THIS question: "${topic}". Make it practical for the Goethe A1 exam. The explanation field must explain WHY the correct answer is right AND what makes the wrong options incorrect, in plain English (max 2 sentences). Respond ONLY with the JSON object, no markdown, no extra text.`;
+
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:300,messages:[{role:"user",content:prompt}]})});
+    const data=await res.json();
+    const text=data.content.map(c=>c.text||"").join("").replace(/```json|```/g,"").trim();
+    const q=JSON.parse(text);
+    document.getElementById("g-ai-status").style.display="none";
+    document.getElementById("g-qcard").style.display="block";
+    renderQuestion(q);
+  }catch(e){
+    document.getElementById("g-ai-status").style.display="none";
+    document.getElementById("g-qcard").style.display="block";
+    renderQuestion(state.qList[state.qIdx%state.qList.length]);
+  }
+}
+
+function loadQuestion(){
+  if(state.qIdx>=state.totalQ){endGame();return;}
+  clearInterval(state.timer);
+  document.getElementById("g-ai-status").style.display="none";
+  document.getElementById("g-qcard").style.display="block";
+  document.getElementById("g-fb").className="fb";
+  document.getElementById("g-explain").className="explanation";
+  document.getElementById("g-next-btn").className="next-btn";
+  document.getElementById("g-choices").innerHTML="";
+  state.answered=false;
+  updateTopbar();
+  renderQuestion(state.qList[state.qIdx]);
+}
+
+function renderQuestion(q){
+  state.answered=false;
+  state.currentQ=q;
+  document.getElementById("g-qtype").textContent=q.typeLabel||"";
+  document.getElementById("g-qtext").textContent=q.q;
+  document.getElementById("g-qhint").textContent=q.hint?"("+q.hint+")":"";
+
+  if(q.type==="mc"){
+    document.getElementById("g-choices").innerHTML=`<div class="choices">${(q.choices||[]).map((c,i)=>`
+      <button class="ch" onclick="checkMC(${i},${q.ans},this)">
+        <span class="ch-label">${["A","B","C","D"][i]}</span>${c}
+      </button>`).join("")}</div>`;
+  } else {
+    document.getElementById("g-choices").innerHTML=`
+      <input class="type-in" id="type-ans" placeholder="Type your German answer…" autocomplete="off"/>
+      <button class="sub-btn" onclick="checkTyped('${(q.ans||"").replace(/'/g,"\\'")}')">Submit answer</button>`;
+    document.getElementById("type-ans").addEventListener("keydown",e=>{if(e.key==="Enter")checkTyped((q.ans||""));});
+  }
+  startTimer();
+  if(state.gameIsMulti) simulateAI();
+}
+
+function checkMC(chosen,correct,btn){
+  if(state.answered) return;
+  state.answered=true;clearInterval(state.timer);
+  const btns=document.querySelectorAll(".ch");
+  btns.forEach(b=>b.disabled=true);
+  state.questionsTotal++;
+  if(chosen===correct){
+    btn.classList.add("ok");
+    const pts=Math.max(50,state.timeLeft*10);
+    state.score+=pts;state.questionsCorrect++;
+    if(state.gameIsMulti) state.mpScores["You (host)"]=(state.mpScores["You (host)"]||0)+pts;
+    addXP(pts);showFB(true,"Richtig! +"+pts+" points");
+  } else {
+    btn.classList.add("no");
+    btns.forEach(b=>{if(parseInt(b.getAttribute("onclick").match(/\d+/)?.[0])===correct) b.classList.add("ok");});
+    showFB(false,"Not quite — correct answer highlighted");
+  }
+  showExplanation(state.currentQ);
+  updateLB();
+  document.getElementById("g-next-btn").className="next-btn show";
+}
+
+function checkTyped(correct){
+  if(state.answered) return;
+  const val=(document.getElementById("type-ans").value||"").trim().toLowerCase();
+  if(!val) return;
+  state.answered=true;clearInterval(state.timer);
+  state.questionsTotal++;
+  const ok=val===correct.toLowerCase()||val.replace(/\s/g,"")=== correct.toLowerCase().replace(/\s/g,"");
+  if(ok){
+    const pts=Math.max(50,state.timeLeft*10);
+    state.score+=pts;state.questionsCorrect++;
+    addXP(pts);showFB(true,"Richtig! +"+pts+" points");
+  } else {
+    showFB(false,'Correct answer: "'+correct+'"');
+  }
+  document.getElementById("type-ans").disabled=true;
+  showExplanation(state.currentQ);
+  document.getElementById("g-next-btn").className="next-btn show";
+}
+
+function nextQuestion(){
+  document.getElementById("g-next-btn").className="next-btn";
+  state.qIdx++;
+  if(state.gameMode==="ai"){
+    if(state.qIdx<state.totalQ) loadAIQuestion();
+    else endGame();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showFB(ok,msg){
+  const fb=document.getElementById("g-fb");
+  const icon=ok?'<i class="ti ti-circle-check" style="font-size:1.1rem;flex-shrink:0"></i>':'<i class="ti ti-circle-x" style="font-size:1.1rem;flex-shrink:0"></i>';
+  fb.innerHTML=icon+msg;
+  fb.className="fb show "+(ok?"ok":"no");
+}
+
+function showExplanation(q){
+  if(!q) return;
+  const box=document.getElementById("g-explain");
+  const txt=document.getElementById("g-explain-text");
+  if(q.explanation){
+    txt.textContent=q.explanation;
+    box.className="explanation show";
+  } else if(state.gameMode==="ai"){
+    txt.innerHTML='<span class="explanation-loading"><i class="ti ti-loader"></i>Loading explanation…</span>';
+    box.className="explanation show";
+  }
+}
+
+function startTimer(){
+  clearInterval(state.timer);
+  state.timeLeft=15;
+  const el=document.getElementById("g-timer");
+  el.className="timer-p";el.textContent="15";
+  state.timer=setInterval(()=>{
+    state.timeLeft--;
+    el.textContent=state.timeLeft;
+    if(state.timeLeft<=5) el.className="timer-p warn";
+    if(state.timeLeft<=0){
+      clearInterval(state.timer);
+      if(!state.answered){
+        state.answered=true;state.questionsTotal++;
+        showFB(false,"Time's up!");
+        showExplanation(state.currentQ);
+        document.getElementById("g-next-btn").className="next-btn show";
+      }
+    }
+  },1000);
+}
+
+function updateLB(){
+  if(!state.gameIsMulti) return;
+  const sorted=state.mpPlayers.map(p=>({...p,pts:state.mpScores[p.name]||0})).sort((a,b)=>b.pts-a.pts);
+  document.getElementById("g-lb").innerHTML=sorted.map(p=>`
+    <div class="lb-item">
+      <div class="av ${p.av}" style="width:24px;height:24px;font-size:0.6rem">${p.ini}</div>
+      <strong>${p.name.split(" ")[0]}</strong>
+      <span style="color:var(--text-muted)">${p.pts}pts</span>
+    </div>`).join("");
+}
+
+function simulateAI(){
+  state.mpPlayers.filter(p=>p.name!=="You (host)").forEach(p=>{
+    setTimeout(()=>{
+      const pts=Math.random()<0.7?Math.floor(40+Math.random()*110):0;
+      state.mpScores[p.name]=(state.mpScores[p.name]||0)+pts;
+      updateLB();
+    },2500+Math.random()*7000);
+  });
+}
+
+// =============================================
+// RESULTS
+// =============================================
+async function endGame(){
+  clearInterval(state.timer);save();
+  showScreen("result");
+  const pct=Math.round(state.score/(state.totalQ*150)*100);
+  const emoji=pct>=80?"🏆":pct>=60?"⭐":"📚";
+  const msg=pct>=80?"Ausgezeichnet! Exam-ready performance!":pct>=60?"Gut gemacht! Keep it up!":"Keep practicing — du schaffst das!";
+
+  let mpHtml="";
+  if(state.gameIsMulti){
+    const sorted=state.mpPlayers.map(p=>({...p,pts:state.mpScores[p.name]||0})).sort((a,b)=>b.pts-a.pts);
+    const medals=["🥇","🥈","🥉"];
+    mpHtml=`<div style="display:flex;justify-content:center;gap:16px;margin:16px 0">${sorted.slice(0,3).map((p,i)=>`
+      <div style="text-align:center">
+        <div style="font-size:1.5rem">${medals[i]}</div>
+        <strong style="font-size:0.82rem;color:var(--text)">${p.name.split(" ")[0]}</strong>
+        <div style="font-size:0.72rem;color:var(--text-muted)">${p.pts} pts</div>
+      </div>`).join("")}</div>`;
+  }
+
+  document.getElementById("res-main").innerHTML=`
+    <div class="res-icon">${emoji}</div>
+    <h2>${msg}</h2>
+    <p>A1 Level · ${state.gameIsMulti?"Multiplayer":"Solo"} · ${state.totalQ} questions</p>
+    <div class="res-stats">
+      <div class="rs"><strong>${state.score}</strong><span>Points</span></div>
+      <div class="rs"><strong>${pct}%</strong><span>Score</span></div>
+      <div class="rs"><strong>${state.xp}</strong><span>Total XP</span></div>
+    </div>${mpHtml}`;
+
+  document.getElementById("ai-tip").innerHTML='<i class="ti ti-brain" style="margin-right:6px"></i>Getting personalized feedback from Claude…';
+
+  const acc=state.questionsTotal?Math.round(state.questionsCorrect/state.questionsTotal*100):0;
+  const tipPrompt=`A student is learning German A1 (for the Goethe exam). They scored ${state.score} points (${pct}% accuracy) in this quiz. Their overall accuracy is ${acc}% across ${state.questionsTotal} total questions. Give them 2 short, specific, encouraging study tips (max 60 words total) tailored to Goethe A1 exam preparation. Be direct and practical. Start with 'Tip 1:'.`;
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:150,messages:[{role:"user",content:tipPrompt}]})});
+    const data=await res.json();
+    const tip=data.content.map(c=>c.text||"").join("").trim();
+    document.getElementById("ai-tip").textContent=tip;
+  }catch(e){
+    document.getElementById("ai-tip").textContent="Keep reviewing your flashcards daily and practice speaking aloud — the Goethe exam tests all four skills: listening, reading, writing, and speaking.";
+  }
+}
+
+function playAgain(){
+  state.gameMode="builtin";state.gameIsMulti=false;startGame();
+}
+
+// =============================================
+// INIT
+// =============================================
+refreshDashboard();
+renderFlashcard();
+renderSpeak();
+</script>
+</body>
+</html>
